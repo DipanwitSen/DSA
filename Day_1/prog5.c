@@ -1,6 +1,5 @@
+//right rotation 
 #include <stdio.h>
-//Name-Dipanwita Sen
-//Roll=22052204
 void EXCHANGE(int *A, int p, int q) {
     int temp = A[p];
     A[p] = A[q];
