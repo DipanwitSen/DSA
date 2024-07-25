@@ -1,3 +1,4 @@
+//2nd largest and 2nd smallest no
 #include <stdio.h>
 #include <stdlib.h>
 
