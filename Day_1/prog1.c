@@ -1,8 +1,6 @@
+// normal print
 #include<stdio.h>
 int main() {
-    printf("Name: Dipanwita Sen\n");
-    printf("Roll: 22052204\n");
-
     FILE *inputFile;
 
 
