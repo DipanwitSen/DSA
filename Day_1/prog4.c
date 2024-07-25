@@ -1,59 +1,77 @@
 #include <stdio.h>
+#include <string.h>
 #include <stdlib.h>
+//Name-Dipanwita Sen
+//Roll=22052204
+#define MAX_NUMBERS 1000
 
-int main(int argc, char *argv[]) {
+int main() {
+    FILE *inputFile;
+    int *numbers = NULL;
+    int num = 0;
+    char filename[100];
 
-    if (argc != 4) {
-        printf("Usage: %s <number of integers> <input file> <output file>\n", argv[0]);
-        return 1;
-    }
+    // Get filename from user
+    printf("Enter the input file name: ");
+    scanf("%s", filename);
 
-    int n = atoi(argv[1]);//array to integer
-    char *inputFileName = argv[2];
-    char *outputFileName = argv[3];
-    FILE *inputFile = fopen(inputFileName, "r");
+    inputFile = fopen(filename, "r");
     if (inputFile == NULL) {
-        printf("Error opening input file %s.\n", inputFileName);
+        printf("Invalid input file\n");
         return 1;
     }
 
-    FILE *outputFile = fopen(outputFileName, "w");
-    if (outputFile == NULL) {
-        printf("Error opening output file %s.\n", outputFileName);
-        fclose(inputFile);
-        return 1;
-    }
-        if (n < 30) {
-        printf("Array should have at least thirty elements\n");
+    // Allocate initial memory for numbers
+    numbers = (int*)malloc(MAX_NUMBERS * sizeof(int));
+    if (numbers == NULL) {
+        printf("Memory allocation failed\n");
         fclose(inputFile);
         return 1;
     }
 
-    int b;
-    for (int i = 0; i < n; i++) {
-        if (fscanf(inputFile, "%d", &b) != 1) {
-            printf("Error reading number from input file.\n");
-            fclose(inputFile);
-            fclose(outputFile);
-            return 1;
+    // Read all numbers from the file
+    printf("Reading numbers from the file...\n");
+    while (fscanf(inputFile, "%d", &numbers[num]) == 1) {
+        num++;
+        if (num >= MAX_NUMBERS) {
+            printf("Reached maximum number of elements\n");
+            break;
         }
-        fprintf(outputFile, "%d\n", b);
     }
 
     fclose(inputFile);
-    fclose(outputFile);
 
-    // Print the content of the output file to the console
-    outputFile = fopen(outputFileName, "r");
-    if (outputFile == NULL) {
-        printf("Error opening output file %s for reading.\n", outputFileName);
+    printf("Total numbers read: %d\n", num);
+
+    // Process the numbers
+    int *count = (int*)calloc(100001, sizeof(int));  // Assuming numbers are between 0 and 100000
+    if (count == NULL) {
+        printf("Memory allocation failed\n");
+        free(numbers);
         return 1;
     }
-    char ch;
-    while ((ch = fgetc(outputFile)) != EOF) {
-        putchar(ch);
+
+    int repeating_numbers = 0;
+    int max_repeat = 0;
+    int max_repeat_num = 0;
+
+    for (int i = 0; i < num; i++) {
+        count[numbers[i]]++;
+        if (count[numbers[i]] == 2) {
+            repeating_numbers++;
+        }
+        if (count[numbers[i]] > max_repeat) {
+            max_repeat = count[numbers[i]];
+            max_repeat_num = numbers[i];
+        }
     }
-    fclose(outputFile);
+
+    printf("Number of repeating numbers: %d\n", repeating_numbers);
+    printf("Number with maximum repetitions: %d (repeats %d times)\n", max_repeat_num, max_repeat);
+
+    // Free allocated memory
+    free(numbers);
+    free(count);
 
     return 0;
 }
