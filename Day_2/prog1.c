@@ -1,3 +1,4 @@
+//Duplicate in a fileS
 #include <stdio.h>
 #include <stdlib.h>
 //Name-Dipanwita Sen
