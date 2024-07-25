@@ -1,6 +1,5 @@
+//previous sum
 #include <stdio.h>
-//Name-Dipanwita Sen
-//Roll=22052204
 int main() {
     int a[100], b[100], n;
     
