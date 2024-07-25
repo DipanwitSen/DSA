@@ -1,8 +1,7 @@
+//Duplicate number
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-//Name-Dipanwita Sen
-//Roll=22052204
 #define MAX_NUMBERS 1000
 
 int main() {
