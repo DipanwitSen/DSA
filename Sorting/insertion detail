@@ -1,0 +1,7 @@
+taking a sorted array part and in temp storing one element from unsorted area and moving element until left part in sorted area.
+eg 2 1 10 6 5
+we take 2 as sorted we select 1 and store in temp so in j we store 2 and 2 is greater than 1  store 2 in position 1 
+we check for more sorted element since its not there at 0 position we store 1
+then in temp we store 10 so 10 is greater than 1 and 2 no change 
+next we select 6 so 10>6 therefor we store 10 in position 3 again we check with 1 and 2 then in 2 nd position we store 6
+lastly we take 5 as temp and check with 10>5 we shift similarly for 6 and store in position 2.
