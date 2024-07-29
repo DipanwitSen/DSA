@@ -1,0 +1,17 @@
+Take example 1 3 2 
+so if we did j < n-1 without flag
+i th loop 0 to 2
+j th loop 0 to 2
+dry run i  j  swap 
+        0  0  1>1 no swap
+        0  1  1>3 no swap
+        0  2  1>2 no swap
+        1  0  3>1 swap 3 1 2
+        1  1  1>1 no swap
+        1  2  1>2 no swap
+        2  0  2>3 no swap
+        2  1  2>1 swap 3 2 1
+        2  2  1>1 no swap 
+so here we notice there are unnecessary loops plus if the array is already arranged there no need to swap so for that reason we give flag .
+n-1-i is to reduce useless step last or first element gets sorted so no need of extra steps .
+        
