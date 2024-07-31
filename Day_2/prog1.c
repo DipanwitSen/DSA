@@ -1,8 +1,6 @@
 //Duplicate in a fileS
 #include <stdio.h>
 #include <stdlib.h>
-//Name-Dipanwita Sen
-//Roll=22052204
 
 void binary(int b, FILE *outputFile) {
     if (b > 1) {
@@ -10,7 +8,6 @@ void binary(int b, FILE *outputFile) {
     }
     fprintf(outputFile, "%d", b % 2);
 }
-
 int main(int argc, char *argv[]) {
 
     if (argc != 4) {
