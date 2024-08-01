@@ -36,6 +36,9 @@ void advancedBubbleSort(int arr[], int n, FILE *fp) {
 }
 
 int main() {
+   printf("Name=Dipanwita \n
+           Sec=40 \n
+           Roll=220522404 \n");
     FILE *fp;
     fp = fopen("input.txt", "r+");
     if (fp == NULL) {
