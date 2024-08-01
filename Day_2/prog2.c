@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
-
+/* Name -Dipanwita sen
+   Roll-22052204
+   Sec -40 */
 // Function to calculate GCD using recursion
 int gcd(int a, int b) {
     if (b == 0) {
