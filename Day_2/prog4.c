@@ -80,6 +80,9 @@ void display(const char *file_name) {
 }
 
 int main() {
+   printf("Name=Dipanwita \n
+           Sec=40 \n
+           Roll=220522404 \n");
     const int max_size = 500;
     int arr[max_size];
     int n, comparisons;
