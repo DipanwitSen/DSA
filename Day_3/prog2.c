@@ -1,54 +1,42 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void merge(int arr[], int l, int m, int r) {
-    int i, j, k;
-    int n1 = m - l + 1;
-    int n2 = r - m;
+// Swap function to swap two elements
+void swap(int *a, int *b) {
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
 
-    int L[n1], R[n2];
+// Partition function for quicksort
+int partition(int a[], int lb, int ub) {
+    int pivot = a[lb];
+    int start = lb;
+    int end = ub;
 
-    for (i = 0; i < n1; i++)
-        L[i] = arr[l + i];
-    for (j = 0; j < n2; j++)
-        R[j] = arr[m + 1 + j];
-
-    i = 0;
-    j = 0;
-    k = l;
-    while (i < n1 && j < n2) {
-        if (L[i] <= R[j]) {
-            arr[k] = L[i];
-            i++;
-        } else {
-            arr[k] = R[j];
-            j++;
+    while (start < end) {
+        while (a[start] <= pivot && start < end) {
+            start++;
         }
-        k++;
+        while (a[end] > pivot) {
+            end--;
+        }
+        if (start < end) {
+            swap(&a[start], &a[end]);
+        }
     }
-
-    while (i < n1) {
-        arr[k] = L[i];
-        i++;
-        k++;
-    }
-
-    while (j < n2) {
-        arr[k] = R[j];
-        j++;
-        k++;
-    }
+    swap(&a[lb], &a[end]);
+    return end;
 }
 
-void merge_sort(int arr[], int l, int r) {
-    if (l < r) {
-        int m = l + (r - l) / 2;
-        merge_sort(arr, l, m);
-        merge_sort(arr, m + 1, r);
-        merge(arr, l, m, r);
+// Quicksort function
+void quick(int a[], int lb, int ub) {
+    if (lb < ub) {
+        int loc = partition(a, lb, ub);
+        quick(a, lb, loc - 1);
+        quick(a, loc + 1, ub);
     }
 }
-
 int read(const char *file_name, int arr[], int max_size) {
     FILE *file = fopen(file_name, "r");
     if (file == NULL) {
