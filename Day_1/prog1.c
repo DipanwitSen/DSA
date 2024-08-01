@@ -1,4 +1,7 @@
 // normal print
+/* Name -Dipanwita sen
+   Roll-22052204
+   Sec -40 */
 #include<stdio.h>
 int main() {
     FILE *inputFile;
