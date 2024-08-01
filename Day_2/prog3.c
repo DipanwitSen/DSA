@@ -1,5 +1,7 @@
 #include <stdio.h>
-
+/* Name -Dipanwita sen
+   Roll-22052204
+   Sec -40 */
 void binary_Search(int target, int low, int high, int a[], int *c) {
     if (low > high) {
         printf("Target not found.\n");
