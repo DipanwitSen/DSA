@@ -12,7 +12,10 @@ int gcd(int a, int b) {
 }
 
 int main(int argc, char *argv[]) {
-    if (argc != 3) {
+   printf("Name=Dipanwita \n
+           Sec=40 \n
+           Roll=220522404 \n");
+      if (argc != 3) {
         printf("Usage: %s <input file> <output file>\n", argv[0]);
         return 1;
     }
