@@ -19,6 +19,9 @@ void ROTATE_RIGHT(int *A, int b) {
 }
 
 int main() {
+   printf("Name=Dipanwita \n
+           Sec=40 \n
+           Roll=220522404 \n");
     int A[100], n, b;
     printf("Enter size of array: ");
     scanf("%d", &n);
