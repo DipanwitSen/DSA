@@ -8,6 +8,9 @@
 #define MAX_NUMBERS 1000
 
 int main() {
+   printf("Name=Dipanwita \n
+           Sec=40 \n
+           Roll=220522404 \n");
     FILE *inputFile;
     int *numbers = NULL;
     int num = 0;
