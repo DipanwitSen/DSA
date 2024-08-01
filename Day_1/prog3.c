@@ -4,6 +4,9 @@
    Sec -40 */
 #include <stdio.h>
 int main() {
+   printf("Name=Dipanwita \n
+           Sec=40 \n
+           Roll=220522404 \n");
     int a[100], b[100], n;
     
     printf("Enter size of array: ");
