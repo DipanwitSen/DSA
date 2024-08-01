@@ -1,4 +1,7 @@
 //2nd largest and 2nd smallest no
+/* Name -Dipanwita sen
+   Roll-22052204
+   Sec -40 */
 #include <stdio.h>
 #include <stdlib.h>
 
