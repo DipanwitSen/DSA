@@ -24,6 +24,9 @@ void binary_Search(int target, int low, int high, int a[], int *c) {
 }
 
 int main() {
+   printf("Name=Dipanwita \n
+           Sec=40 \n
+           Roll=220522404 \n");
     int n, target;
     printf("Enter array size: ");
     scanf("%d", &n);
