@@ -1,4 +1,7 @@
 //previous sum
+/* Name -Dipanwita sen
+   Roll-22052204
+   Sec -40 */
 #include <stdio.h>
 int main() {
     int a[100], b[100], n;
