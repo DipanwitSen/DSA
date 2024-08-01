@@ -104,6 +104,7 @@ void display(const char *file_name) {
 }
 
 int main() {
+    printf("Name:Dipanwita Sen\n Sec:40\n Roll :22052204\n");
     const int max_size = 500;
     int arr[max_size];
     int n;
