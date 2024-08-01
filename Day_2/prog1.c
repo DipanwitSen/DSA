@@ -3,7 +3,7 @@
 #include <stdlib.h>
 /* Name -Dipanwita sen
    Roll-22052204
-   Sec -40
+   Sec -40 */
 
 void binary(int b, FILE *outputFile) {
     if (b > 1) {
