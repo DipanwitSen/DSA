@@ -12,6 +12,9 @@ Store the result in “outInsDesc.dat”.
 ● For random data: Read data from a file “inRand.dat” having content 55 66 33 11 44 ...,
 Store the result in “outInsRand.dat”
 */
+/* Name -Dipanwita sen
+   Roll-22052204
+   Sec -40 */
 #include <stdio.h>
 #include <stdlib.h>
 
