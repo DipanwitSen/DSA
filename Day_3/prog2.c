@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
-
+/* Dipanwita Sen
+22052204*/
 // Swap function to swap two elements
 void swap(int *a, int *b) {
     int temp = *a;
@@ -8,7 +9,7 @@ void swap(int *a, int *b) {
     *b = temp;
 }
 
-// Partition function for quicksort
+// Partition function for quicksort (ascending order)
 int partition(int a[], int lb, int ub) {
     int pivot = a[lb];
     int start = lb;
@@ -37,6 +38,31 @@ void quick(int a[], int lb, int ub) {
         quick(a, loc + 1, ub);
     }
 }
+
+// Quicksort function for descending order
+void quick_descending(int a[], int lb, int ub) {
+    if (lb < ub) {
+        int pivot = a[lb];
+        int start = lb;
+        int end = ub;
+
+        while (start < end) {
+            while (a[start] >= pivot && start < end) {
+                start++;
+            }
+            while (a[end] < pivot) {
+                end--;
+            }
+            if (start < end) {
+                swap(&a[start], &a[end]);
+            }
+        }
+        swap(&a[lb], &a[end]);
+        quick_descending(a, lb, end - 1);
+        quick_descending(a, end + 1, ub);
+    }
+}
+
 int read(const char *file_name, int arr[], int max_size) {
     FILE *file = fopen(file_name, "r");
     if (file == NULL) {
@@ -81,7 +107,7 @@ int main() {
     const int max_size = 500;
     int arr[max_size];
     int n;
-    char input_file[20], output_file[20];
+    char input_file[50], output_file[50];
     int choice;
 
     while (1) {
@@ -119,7 +145,13 @@ int main() {
         n = read(input_file, arr, max_size);
 
         // Sort the data
-        quick_sort(arr, 0, n - 1);
+        if (choice == 1) {
+            quick(arr, 0, n - 1);
+        } else if (choice == 2) {
+            quick_descending(arr, 0, n - 1);
+        } else {
+            quick(arr, 0, n - 1);  // or quick_descending, depending on requirements
+        }
 
         // Write sorted data to output file
         write(output_file, arr, n);
