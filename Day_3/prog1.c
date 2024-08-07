@@ -1,6 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
-/*Nmae Dipanwita Sen Roll 22052204
+
+/*Nmae Dipanwita Sen Roll 22052204*/
+
+int comparisons = 0;  // Global variable to count comparisons
+
 void merge(int arr[], int l, int m, int r) {
     int i, j, k;
     int n1 = m - l + 1;
@@ -17,6 +21,7 @@ void merge(int arr[], int l, int m, int r) {
     j = 0;
     k = l;
     while (i < n1 && j < n2) {
+        comparisons++;
         if (L[i] <= R[j]) {
             arr[k] = L[i];
             i++;
@@ -117,11 +122,11 @@ int main() {
                 break;
             case 2:
                 snprintf(input_file, sizeof(input_file), "inDesc.dat");
-                snprintf(output_file, sizeof(output_file), "outInsDesc.dat");
+                snprintf(output_file, sizeof(output_file), "outInsAsce.dat");
                 break;
             case 3:
                 snprintf(input_file, sizeof(input_file), "inRand.dat");
-                snprintf(output_file, sizeof(output_file), "outInsRand.dat");
+                snprintf(output_file, sizeof(output_file), "outInsAsce.dat");
                 break;
             default:
                 printf("Invalid choice, please try again.\n");
@@ -130,6 +135,9 @@ int main() {
 
         // Read data from input file
         n = read(input_file, arr, max_size);
+
+        // Reset the comparison counter
+        comparisons = 0;
 
         // Sort the data
         merge_sort(arr, 0, n - 1);
@@ -140,6 +148,9 @@ int main() {
         // Display the sorted data
         printf("\nSorted Data:\n");
         display(output_file);
+
+        // Display the number of comparisons
+        printf("Number of comparisons: %d\n", comparisons);
 
         // Display the sorting scenario
         if (choice == 1) {
