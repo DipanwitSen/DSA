@@ -136,9 +136,6 @@ int main() {
         // Read data from input file
         n = read(input_file, arr, max_size);
 
-        // Reset the comparison counter
-        comparisons = 0;
-
         // Sort the data
         merge_sort(arr, 0, n - 1);
 
@@ -160,6 +157,9 @@ int main() {
         } else {
             printf("Scenario: Random Case\n");
         }
+
+        // Reset the comparison counter
+        comparisons = 0;
     }
 
     return 0;
