@@ -1,27 +1,27 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
+#include <string.h>
 
-/*Nmae Dipanwita Sen Roll 22052204*/
-
-int comparisons = 0;  // Global variable to count comparisons
-
-void merge(int arr[], int l, int m, int r) {
+// Function to merge two sorted arrays
+void merge(int arr[], int left, int mid, int right, int *comparisons) {
     int i, j, k;
-    int n1 = m - l + 1;
-    int n2 = r - m;
+    int n1 = mid - left + 1;
+    int n2 = right - mid;
 
     int L[n1], R[n2];
 
     for (i = 0; i < n1; i++)
-        L[i] = arr[l + i];
+        L[i] = arr[left + i];
     for (j = 0; j < n2; j++)
-        R[j] = arr[m + 1 + j];
+        R[j] = arr[mid + 1 + j];
 
     i = 0;
     j = 0;
-    k = l;
+    k = left;
+
     while (i < n1 && j < n2) {
-        comparisons++;
+        (*comparisons)++; // Count each comparison
         if (L[i] <= R[j]) {
             arr[k] = L[i];
             i++;
@@ -45,121 +45,148 @@ void merge(int arr[], int l, int m, int r) {
     }
 }
 
-void merge_sort(int arr[], int l, int r) {
-    if (l < r) {
-        int m = l + (r - l) / 2;
-        merge_sort(arr, l, m);
-        merge_sort(arr, m + 1, r);
-        merge(arr, l, m, r);
+// Function to perform merge sort
+void mergeSort(int arr[], int left, int right, int *comparisons) {
+    if (left < right) {
+        int mid = left + (right - left) / 2;
+
+        mergeSort(arr, left, mid, comparisons);
+        mergeSort(arr, mid + 1, right, comparisons);
+
+        merge(arr, left, mid, right, comparisons);
     }
 }
 
-int read(const char *file_name, int arr[], int max_size) {
-    FILE *file = fopen(file_name, "r");
-    if (file == NULL) {
-        printf("Error opening file %s\n", file_name);
-        return 0;
+// Function to read data from file
+void readDataFromFile(char *filename, int arr[], int *size) {
+    FILE *fp = fopen(filename, "r");
+    if (fp == NULL) {
+        printf("Error opening file\n");
+        exit(1);
     }
-    int count = 0;
-    while (count < max_size && fscanf(file, "%d", &arr[count]) != EOF) {
-        count++;
+
+    int i = 0;
+    while (fscanf(fp, "%d", &arr[i]) != EOF) {
+        i++;
     }
-    fclose(file);
-    return count;
+
+    *size = i;
+    fclose(fp);
 }
 
-void write(const char *file_name, int arr[], int n) {
-    FILE *file = fopen(file_name, "w");
-    if (file == NULL) {
-        printf("Error opening file %s\n", file_name);
-        return;
+// Function to write data to file
+void writeDataToFile(char *filename, int arr[], int size) {
+    FILE *fp = fopen(filename, "w");
+    if (fp == NULL) {
+        printf("Error opening file\n");
+        exit(1);
     }
-    for (int i = 0; i < n; i++) {
-        fprintf(file, "%d ", arr[i]);
-    }
-    fclose(file);
-}
 
-void display(const char *file_name) {
-    FILE *file = fopen(file_name, "r");
-    if (file == NULL) {
-        printf("Error opening file %s\n", file_name);
-        return;
+    for (int i = 0; i < size; i++) {
+        fprintf(fp, "%d ", arr[i]);
     }
-    int value;
-    while (fscanf(file, "%d", &value) != EOF) {
-        printf("%d ", value);
-    }
-    printf("\n");
-    fclose(file);
+
+    fclose(fp);
 }
 
 int main() {
-    printf("Name:Dipanwita Sen\n Sec:40\n Roll :22052204\n");
-    const int max_size = 500;
-    int arr[max_size];
-    int n;
-    char input_file[20], output_file[20];
-    int choice;
+    int option;
+    char filename[20];
+    int arr[500];
+    int size;
+    int comparisons = 0;
+    clock_t start, end;
 
-    while (1) {
-        printf("\nMenu:\n");
-        printf("1. Sort Ascending Order Data\n");
-        printf("2. Sort Descending Order Data\n");
-        printf("3. Sort Random Data\n");
-        printf("4. Exit\n");
-        printf("Enter your choice: ");
-        scanf("%d", &choice);
+    printf("MAIN MENU (MERGE SORT)\n");
+    printf("1. Ascending Data\n");
+    printf("2. Descending Data\n");
+    printf("3. Random Data\n");
+    printf("4. ERROR (EXIT)\n");
+    printf("Enter option: ");
+    scanf("%d", &option);
 
-        if (choice == 4) {
+    switch (option) {
+        case 1:
+            strcpy(filename, "inAsce.dat");
+            readDataFromFile(filename, arr, &size);
+            printf("Before Sorting: ");
+            for (int i = 0; i < size; i++) {
+                printf("%d ", arr[i]);
+            }
+            printf("\n");
+
+            start = clock();
+            mergeSort(arr, 0, size - 1, &comparisons);
+            end = clock();
+
+            printf("After Sorting: ");
+            for (int i = 0; i < size; i++) {
+                printf("%d ", arr[i]);
+            }
+            printf("\n");
+            printf("Number of Comparisons: %d\n", comparisons);
+            printf("Execution Time: %ld microseconds\n", (end - start) * 1000000 / CLOCKS_PER_SEC);
+
+            strcpy(filename, "outMergeAsce.dat");
+            writeDataToFile(filename, arr, size);
             break;
-        }
 
-        switch (choice) {
-            case 1:
-                snprintf(input_file, sizeof(input_file), "inAsce.dat");
-                snprintf(output_file, sizeof(output_file), "outInsAsce.dat");
-                break;
-            case 2:
-                snprintf(input_file, sizeof(input_file), "inDesc.dat");
-                snprintf(output_file, sizeof(output_file), "outInsAsce.dat");
-                break;
-            case 3:
-                snprintf(input_file, sizeof(input_file), "inRand.dat");
-                snprintf(output_file, sizeof(output_file), "outInsAsce.dat");
-                break;
-            default:
-                printf("Invalid choice, please try again.\n");
-                continue;
-        }
+        case 2:
+            strcpy(filename, "inDesc.dat");
+            readDataFromFile(filename, arr, &size);
+            printf("Before Sorting: ");
+            for (int i = 0; i < size; i++) {
+                printf("%d ", arr[i]);
+            }
+            printf("\n");
 
-        // Read data from input file
-        n = read(input_file, arr, max_size);
+            start = clock();
+            mergeSort(arr, 0, size - 1, &comparisons);
+            end = clock();
 
-        // Sort the data
-        merge_sort(arr, 0, n - 1);
+            printf("After Sorting: ");
+            for (int i = 0; i < size; i++) {
+                printf("%d ", arr[i]);
+            }
+            printf("\n");
+            printf("Number of Comparisons: %d\n", comparisons);
+            printf("Execution Time: %ld microseconds\n", (end - start) * 1000000 / CLOCKS_PER_SEC);
 
-        // Write sorted data to output file
-        write(output_file, arr, n);
+            strcpy(filename, "outMergeDesc.dat");
+            writeDataToFile(filename, arr, size);
+            break;
 
-        // Display the sorted data
-        printf("\nSorted Data:\n");
-        display(output_file);
+        case 3:
+            strcpy(filename, "inRand.dat");
+            readDataFromFile(filename, arr, &size);
+            printf("Before Sorting: ");
+            for (int i = 0; i < size; i++) {
+                printf("%d ", arr[i]);
+            }
+            printf("\n");
 
-        // Display the number of comparisons
-        printf("Number of comparisons: %d\n", comparisons);
+            start = clock();
+            mergeSort(arr, 0, size - 1, &comparisons);
+            end = clock();
 
-        // Display the sorting scenario
-        if (choice == 1) {
-            printf("Scenario: Best Case\n");
-        } else if (choice == 2) {
-            printf("Scenario: Worst Case\n");
-        } else {
-            printf("Scenario: Random Case\n");
-        }
+            printf("After Sorting: ");
+            for (int i = 0; i < size; i++) {
+                printf("%d ", arr[i]);
+            }
+            printf("\n");
+            printf("Number of Comparisons: %d\n", comparisons);
+            printf("Execution Time: %ld microseconds\n", (end - start) * 1000000 / CLOCKS_PER_SEC);
 
-        // Reset the comparison counter
-        comparisons = 0;
+            strcpy(filename, "outMergeRand.dat");
+            writeDataToFile(filename, arr, size);
+            break;
+
+        case 4:
+            printf("Exiting...\n");
+            exit(0);
+
+        default:
+            printf("Invalid option\n");
     }
 
     return 0;
