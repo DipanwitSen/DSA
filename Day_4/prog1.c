@@ -5,7 +5,7 @@ struct person {
     int id;
     char name[100];  // Fixed-size array for storing the name
     int age;
-    int height;
+    float height;    // Changed to float for height
     int weight;
 };
 
@@ -14,7 +14,7 @@ void read_data(struct person *a, int n) {
         printf("ID: %d\n", a[i].id);
         printf("Name: %s\n", a[i].name);
         printf("Age: %d\n", a[i].age);
-        printf("Height: %d\n", a[i].height);
+        printf("Height: %.1f\n", a[i].height);
         printf("Weight: %d\n\n", a[i].weight);
     }
 }
@@ -125,7 +125,7 @@ int main() {
         printf("Age: ");
         scanf("%d", &a[i].age);
         printf("Height: ");
-        scanf("%d", &a[i].height);
+        scanf("%f", &a[i].height);  // Reading height as float
         printf("Weight: ");
         scanf("%d", &a[i].weight);
     }
@@ -167,7 +167,7 @@ int main() {
                 printf("Age: ");
                 scanf("%d", &new_person.age);
                 printf("Height: ");
-                scanf("%d", &new_person.height);
+                scanf("%f", &new_person.height);  // Reading height as float
                 printf("Weight: ");
                 scanf("%d", &new_person.weight);
                 insert_min_heap(a, &n, new_person);
