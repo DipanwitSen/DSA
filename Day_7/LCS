@@ -1,0 +1,54 @@
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+// Function to return the maximum of two integers
+int max(int a, int b)
+{
+    return (a > b) ? a : b;
+}
+
+// Returns length of LCS for S1[0..m-1], S2[0..n-1]
+int lcs(char *S1, char *S2, int i, int j, char *lcsString, int index)
+{
+    if (S1[i] == '\0' || S2[j] == '\0')
+    {
+        lcsString[index] = '\0'; // Null terminate the LCS string
+        return 0;
+    }
+    if (S1[i] == S2[j])
+    {
+        lcsString[index] = S1[i]; // Store the common character
+        return 1 + lcs(S1, S2, i + 1, j + 1, lcsString, index + 1);
+    }
+    else
+    {
+        int len1 = lcs(S1, S2, i, j + 1, lcsString, index);
+        int len2 = lcs(S1, S2, i + 1, j, lcsString, index);
+        return max(len1, len2);
+    }
+}
+
+int main()
+{
+    char S1[100], S2[100];
+
+    // Taking user input for the two strings
+    printf("Enter first string: ");
+    scanf("%s", S1);
+    printf("Enter second string: ");
+    scanf("%s", S2);
+
+    int m = strlen(S1);
+    int n = strlen(S2);
+
+    char lcsString[100]; // To store the longest common subsequence
+
+    // Function Call
+    int length = lcs(S1, S2, 0, 0, lcsString, 0);
+
+    printf("Length of LCS is %d\n", length);
+    printf("Longest Common Subsequence is: %s\n", lcsString);
+
+    return 0;
+}
